@@ -1,0 +1,7 @@
+soap_url: 'https://speller.yandex.net/services/spellservice?WSDL'
+
+login: ' https://test-stand.gb.ru/gateway/login'
+posts: 'https://test-stand.gb.ru/api/posts'
+
+user: 'lem'
+pas: '45e9ed6893'
