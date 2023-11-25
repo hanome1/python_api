@@ -19,12 +19,14 @@ with open('config.yaml', encoding='utf-8') as f:
 
 def test_1(token):
     res_get = requests.get(url=cfg['posts'], headers={'X-Auth-Token': token}, params={'owner': 'notMe'}).json()
-    print(res_get)
+    # print(res_get)
     res = False
     for post in res_get['data']:
         if cfg['post_desc'] in post['description']:
             res = True
     assert res, 'POST NOT FOUND'
+
+    # return res
 
 
 '''
@@ -40,3 +42,4 @@ def test_2(token):
             res = True
     assert res, 'POST NOT FOUND'
 
+# print(test_1(requests.post(url=cfg['login'], data={'username': cfg['user'], 'password': cfg['pas']}).json()['token']))

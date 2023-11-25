@@ -15,6 +15,8 @@ def word_bad():
 
 @pytest.fixture()
 def token():
-    token = requests.post(url=cfg['login'], data={'username': cfg['user'], 'password': cfg['pas']}).json()['token']
-    print(token)
-    return token
+    return requests.post(url=cfg['login'], data={'username': cfg['user'], 'password': cfg['pas']}).json()['token']
+
+@pytest.fixture()
+def post_create():
+    res = requests.post(url=cfg['posts'], headers={'X-Auth-Token': token}, params={'title': 'Test title', 'description': cfg['post_test_desc'], 'content': 'test text content\n'*10})

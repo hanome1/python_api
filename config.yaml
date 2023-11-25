@@ -6,4 +6,5 @@ posts: 'https://test-stand.gb.ru/api/posts'
 user: 'lem'
 pas: '45e9ed6893'
 
-post_desc: 'Описание'
+post_desc: 'Описани'
+post_test_desc: 'Test desc'
