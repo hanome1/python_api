@@ -8,3 +8,7 @@ pas: '45e9ed6893'
 
 post_desc: 'Описани'
 post_test_desc: 'Test desc'
+
+address: https://test-stand.gb.ru/
+browser: chrome
+sleep_time: 1
