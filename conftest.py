@@ -34,7 +34,7 @@ def pas_field():
     return """//*[@id="login"]/div[2]/label/input"""
 
 @pytest.fixture()
-def btn():
+def log_btn():
     return """//*[@id="login"]/div[3]/button"""
 
 @pytest.fixture()
@@ -50,3 +50,36 @@ def site():
     site = Site(cfg["address"])
     yield site
     site.close()
+
+# homework2
+
+@pytest.fixture()
+def new_post_btn():
+    site = Site(cfg["address"])
+    return site.find_element("xpath", """//*[@id="create-btn"]""")
+
+@pytest.fixture()
+def new_post_title():
+    site = Site(cfg["address"])
+    return site.find_element("xpath", """//*[@id="create-item"]/div/div/div[1]/div/label/input""")
+
+@pytest.fixture()
+def new_post_desc():
+    site = Site(cfg["address"])
+    return site.find_element("xpath", """//*[@id="create-item"]/div/div/div[2]/div/label/span/textarea""")
+
+@pytest.fixture()
+def new_post_content():
+    site = Site(cfg["address"])
+    return site.find_element("xpath", """//*[@id="create-item"]/div/div/div[3]/div/label/span/textarea""")
+
+@pytest.fixture()
+def new_post_confirm_btn():
+    site = Site(cfg["address"])
+    return site.find_element("xpath", """//*[@id="create-item"]/div/div/div[7]/div/button""")
+
+
+@pytest.fixture()
+def new_post_result():
+    site = Site(cfg["address"])
+    return site.find_element("xpath", """//*[@id="app"]/main/div/div[1]/h1""")
