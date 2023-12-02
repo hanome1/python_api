@@ -1,6 +1,6 @@
 import yaml
 from module import Site
-from random import random
+import time
 
 with open("config.yaml") as f:
     cfg = yaml.safe_load(f)
@@ -28,12 +28,14 @@ def test_step2(site, login_field, pas_field, log_btn, blog_head,
 
     # homework2
 
-    title = f'Test#{random(0,1000000)}'
+    time.sleep(1)
+    title = 'Test#'
     new_post_btn = site.find_element("xpath", new_post_btn)
     new_post_btn.click()
     new_post_title = site.find_element("xpath", new_post_title)
     new_post_title.send_keys(title)
     new_post_confirm_btn = site.find_element("xpath", new_post_confirm_btn)
     new_post_confirm_btn.click()
+    time.sleep(1)
     new_post_result = site.find_element("xpath", new_post_result)
     assert new_post_result.text == title
