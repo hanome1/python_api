@@ -42,6 +42,10 @@ def err_label():
     return """//*[@id="app"]/main/div/div/div[2]/h2"""
 
 @pytest.fixture()
+def blog_head():
+    return """//*[@id="app"]/main/div/div[1]/h1"""
+
+@pytest.fixture()
 def site():
     site = Site(cfg["address"])
     yield site
