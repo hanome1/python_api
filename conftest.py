@@ -125,3 +125,5 @@ def new_post_confirm_btn():
 @pytest.fixture()
 def new_post_result():
     return """//*[@id="app"]/main/div/div[1]/h1"""
+
+

@@ -1,5 +1,6 @@
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import logging
 
 
 class BasePage:
@@ -19,3 +20,10 @@ class BasePage:
 
     def go_to_site(self):
         return self.driver.get(self.base_url)
+    
+    def switch_to_alert(self): 
+        alert = WebDriverWait(self.driver, timeout=3).until(EC.alert_is_present())
+        msg = alert.text
+        # logging.warning(f'{msg=}')
+        alert.accept()
+        return msg
