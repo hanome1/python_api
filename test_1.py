@@ -78,7 +78,7 @@ def test_step4(browser):
     test_page.click_contact_confirm_btn()
     msg = test_page.switch_to_alert()
     logging.info(f'Got alert message: {msg}')
-    assert msg != None
+    assert msg == 'Form successfully submitted'
 
     
     
