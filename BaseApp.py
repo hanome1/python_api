@@ -8,22 +8,35 @@ class BasePage:
         self.driver = driver
         self.base_url = "https://test-stand.gb.ru/"
 
-    def find_element(self, locator, timer=10):
-        return WebDriverWait(self.driver, timer).until(
-            EC.presence_of_element_located(locator),
-            message=f"Can't find element by locator {locator}",
-        )
+    def find_element(self, locator, time=30):
+        try:
+            element = WebDriverWait(self.driver, time).until(EC.presence_of_element_located(locator),
+                                                             message=f"Can't find element by locator {locator} ")
+        except:
+            logging.exception("Find element exception")
+            element = None
+        return element
 
     def get_element_property(self, locator, property):
         element = self.find_element(locator)
-        return element.value_of_css_property(property)
+        if element:
+            return element.value_of_css_property(property)
+        else:
+            logging.error(f'Property {property} not found in element with locator {locator}')
+            return None
 
     def go_to_site(self):
-        return self.driver.get(self.base_url)
+        try:
+            start_browsing = self.driver.get(self.base_url)
+        except:
+            logging.exception("Exception while open site")
+            start_browsing = None
+        return start_browsing
     
-    def switch_to_alert(self): 
-        alert = WebDriverWait(self.driver, timeout=3).until(EC.alert_is_present())
-        msg = alert.text
-        # logging.warning(f'{msg=}')
-        alert.accept()
-        return msg
+    def alert(self):
+        try:
+            alert_obj = self.driver.switch_to.alert
+            return alert_obj.text
+        except:
+            logging.exception("Exception with alert")
+            return None

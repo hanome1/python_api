@@ -2,6 +2,8 @@ import yaml
 from testpage import OperationsHelper
 import time
 import logging
+import requests
+from selenium.webdriver.common.by import By
 
 with open("config.yaml") as f:
     cfg = yaml.safe_load(f)
@@ -80,5 +82,25 @@ def test_step4(browser):
     logging.info(f'Got alert message: {msg}')
     assert msg == 'Form successfully submitted'
 
+def test_step5_1(token):
+    logging.info('Test5_1 starting')
+    res_get = requests.get(url=cfg['posts'], headers={'X-Auth-Token': token}, params={'owner': 'notMe'}).json()
+    # print(res_get)
+    res = False
+    for post in res_get['data']:
+        if cfg['post_desc'] in post['description']:
+            res = True
+    assert res, 'POST NOT FOUND'
+
+
+def test_step5_2(token):
+    logging.info('Test5_2 starting')
+    post = requests.post(url=cfg['posts'], headers={'X-Auth-Token': token}, params={'title': 'Test title', 'description': cfg['post_test_desc'], 'content': 'test text content\n'*10})
+    res_get = requests.get(url=cfg['posts'], headers={'X-Auth-Token': token}, params={'description': cfg['post_test_desc']}).json()
+    res = False
+    for post in res_get['data']:
+        if cfg['post_test_desc'] == post['description']:
+            res = True
+    assert res, 'POST NOT FOUND'
     
     

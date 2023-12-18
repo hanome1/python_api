@@ -5,6 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
+import requests
 
 # with open("./config.yaml") as f:
 #     testdata = yaml.safe_load(f)
@@ -125,5 +126,9 @@ def new_post_confirm_btn():
 @pytest.fixture()
 def new_post_result():
     return """//*[@id="app"]/main/div/div[1]/h1"""
+
+@pytest.fixture()
+def token():
+    return requests.post(url=cfg['login'], data={'username': cfg['user'], 'password': cfg['pas']}).json()['token']
 
 
